@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="csvParser" class="org.konanov.utils.CsvParser"/>
+
+    <bean name="stageMapper" class="org.konanov.mapper.StageMapper">
+        <constructor-arg name="parser" ref="csvParser"/>
+    </bean>
+
+    <bean name="questionProviderService" class="org.konanov.service.QuestionProviderService">
+        <constructor-arg name="mapper" ref="stageMapper"/>
+    </bean>
+
+    <bean name="answerPrinterService" class="org.konanov.service.AnswerPrinterService"/>
+
+    <bean name="logicalCheckService" class="org.konanov.service.LogicalCheckService"/>
+
+    <bean name="surveySelector" class="org.konanov.service.SurveyStageSelectorService">
+        <constructor-arg name="questionProviderService" ref="questionProviderService"/>
+        <constructor-arg name="answerPrinterService" ref="answerPrinterService"/>
+        <constructor-arg name="checkService" ref="logicalCheckService"/>
+    </bean>
+</beans>
