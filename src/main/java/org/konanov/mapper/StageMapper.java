@@ -2,12 +2,14 @@ package org.konanov.mapper;
 
 import org.konanov.domain.TestStage;
 import org.konanov.utils.CsvParser;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+@Component
 public class StageMapper {
     private CsvParser parser;
 

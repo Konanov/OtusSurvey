@@ -2,9 +2,9 @@ package org.konanov.service;
 
 import lombok.RequiredArgsConstructor;
 import org.konanov.domain.TestStage;
+import org.springframework.stereotype.Service;
 
-import java.util.Scanner;
-
+@Service
 @RequiredArgsConstructor
 public class SurveyStageSelectorService {
 
@@ -12,10 +12,9 @@ public class SurveyStageSelectorService {
     private final AnswerPrinterService answerPrinterService;
     private final LogicalCheckService checkService;
 
-    public void doQuestion(Scanner scanner, int questionOrder) {
+    public void doQuestion(int questionOrder) {
         final TestStage stage = questionProviderService.getStageByNumber(questionOrder);
-        questionProviderService.getStageByNumber(questionOrder);
         answerPrinterService.printAnswers(stage);
-        checkService.checkAnswer(scanner, stage);
+        checkService.checkAnswer(stage);
     }
 }

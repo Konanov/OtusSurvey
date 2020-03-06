@@ -1,7 +1,9 @@
 package org.konanov.service;
 
 import org.konanov.domain.TestStage;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AnswerPrinterService {
 
     public void printAnswers(TestStage stage) {
