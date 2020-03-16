@@ -1,14 +1,18 @@
 package org.konanov.service;
 
 import org.konanov.domain.TestStage;
+import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
 
+@Service
 public class LogicalCheckService {
 
     private int totalPoints = 0;
 
-    public void checkAnswer(Scanner scanner, TestStage stage) {
+    private final Scanner scanner = new Scanner(System.in);
+
+    public void checkAnswer(TestStage stage) {
         while (true) {
             final String answer = scanner.nextLine().trim();
             final boolean notFirstAnswer = !answer.equalsIgnoreCase(stage.getFirstAnswer());

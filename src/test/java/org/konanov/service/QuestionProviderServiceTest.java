@@ -1,15 +1,16 @@
 package org.konanov.service;
 
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.konanov.domain.TestStage;
 import org.konanov.mapper.StageMapper;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,12 +22,8 @@ public class QuestionProviderServiceTest {
     @Mock
     private StageMapper stageMapper;
 
+    @InjectMocks
     private QuestionProviderService service;
-
-    @Before
-    public void setUp() throws Exception {
-        this.service = new QuestionProviderService(stageMapper);
-    }
 
     @Test
     public void service_shouldBeAbleToLoadStages() throws IOException {
@@ -38,9 +35,9 @@ public class QuestionProviderServiceTest {
                 -20,
                 "Emperor Of Mankind",
                 10);
-        when(stageMapper.convertToStages("/real_data.csv")).thenReturn(singletonList(stage));
+        when(stageMapper.convertToStages(Locale.ENGLISH)).thenReturn(singletonList(stage));
 
-        service.createQuestions("/real_data.csv");
+        service.createQuestions(Locale.ENGLISH);
         final TestStage actualStage = service.getStageByNumber(0);
         assertThat(actualStage).usingRecursiveComparison().isEqualTo(stage);
     }

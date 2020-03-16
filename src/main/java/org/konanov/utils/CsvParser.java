@@ -2,12 +2,14 @@ package org.konanov.utils;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class CsvParser {
 
     public List<String[]> readQuestions(String questionsPath) throws IOException {
